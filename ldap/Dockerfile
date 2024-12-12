@@ -1,13 +1,11 @@
 FROM centos:centos7
 
-MAINTAINER John Gasper <jgasper@unicon.net>
-
 # Ajustar os repositórios para usar o Vault do CentOS 7
 RUN sed -i 's|mirrorlist|#mirrorlist|g' /etc/yum.repos.d/CentOS-Base.repo && \
     sed -i 's|#baseurl|baseurl|g' /etc/yum.repos.d/CentOS-Base.repo && \
     sed -i 's|http://mirror.centos.org|http://vault.centos.org|g' /etc/yum.repos.d/CentOS-Base.repo && \
     yum clean all
-    
+
 RUN yum install -y epel-release \
     && yum update -y \
     && yum install -y 389-ds-base 389-adminutil \
